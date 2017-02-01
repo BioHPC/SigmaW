@@ -1,0 +1,163 @@
+<html>  
+  <head>
+    <script>
+	  window.onload = function() {
+		  document.getElementById('extended_menu').style.display = 'none';
+		  document.getElementById('paired_read').style.display = 'none';
+
+		  document.getElementById('extended').onclick = function() {
+			  toggleExtendedMenu(this, 'extended_menu');
+		  };
+      
+      document.getElementById('read_file_error').style.display = 'none';
+      document.getElementById('email_error').style.display = 'none';
+	  };
+	
+	  function toggleExtendedMenu(box, id) {
+	    var el = document.getElementById(id);
+		
+		if (box.checked) {
+		  el.style.display = 'block';
+		}
+		else {
+		  el.style.display = 'none';
+        }
+	  }
+    
+    function switchReadType(btn, ids, idp) {
+      var sel = document.getElementById(ids);
+      var pel = document.getElementById(idp);
+      
+      if (btn.value == 'single') {
+        sel.style.display = 'block';
+        pel.style.display = 'none';
+      }
+      else {
+        sel.style.display = 'none';
+        pel.style.display = 'block';
+      }
+    }
+    
+    function validateForm()
+    {
+      var mode = document.getElementById("read_type").value;
+      //if (mode == 'single') {
+      //  if (document.getElementById("single_file").value == "") {
+      //    document.getElementById("read_file_error").style.display='block';
+      //    return false;
+      //  }
+      //}
+      //else {
+      //  if (document.getElementById("paired_file1").value == "" || document.getElementById("paired_file2").value == "") {
+      //    document.getElementById("read_file_error").style.display='block';
+      //    return false;
+      //  }
+      //}
+      
+      //document.getElementById("read_file_error").style.display='none';
+
+      //if (!document.getElementById("email").value.includes("@")) {
+      //  document.getElementById('email_error').style.display = 'block';
+      //  return false;
+      //}
+      return true;
+    }
+	</script>
+	
+	<title>SigmaW: A web based version of Sigma</title>
+  </head>
+  
+  <body>
+    <!-- Put all of this in a table to make it nice -->
+    <h2>SigmaW</h2>  
+    
+	<form action="" method="post" id="sigmaForm" enctype="multipart/form-data" onsubmit="return validateForm()">{% csrf_token %}
+    Single end: <input type="radio" name="read_type" id="read_type" value="single" onclick="switchReadType(this,'single_read','paired_read');" checked="checked"> Paired end: <input type="radio" name="read_type" id="read_type" value="paired" onclick="switchReadType(this,'single_read','paired_read');">
+    <br><br>
+    <div id="read_file_error">
+      <font color="red">You have not uploaded read files!</font><br>
+    </div>
+    <div id="single_read">
+      Select single read file: <input type="file" name="single_file" id="single_file">
+    </div>
+        
+    <div id="paired_read">
+      Select paired read file 1: <input type="file" name="paired_file1" id="paired_file1"><br>
+      Select paired read file 2: <input type="file" name="paired_file2" id="paired_file2">
+    </div>
+    <br>
+    
+    Would you like to modify the Sigma configuration? <input type="checkbox" name="extended" id="extended" value="1">
+    <br><br>
+    <div id="extended_menu">
+      <table border="0">
+        <tr><td>
+            <b>Bowtie Options</b>
+        </tr>
+    <tr><td>
+      Bowtie2 Mode: <td><select name="bowtie_mode">
+        <option value="sensitive">sensitive</option>
+        <option value="very-sensitive">very sensitive</option>
+        <option value="only-mismatch">only mismtach</option>
+      </select>
+    </tr>
+		<tr><td>
+			Maximum Mismatch Count: <td><input type=textfield" value="3" name="max_mismatch_count"> 
+		</tr>
+		<tr><td>
+			Minimum Fragment Length: <td><input type="textfield" value="0" name="min_fragment_length">
+		</tr>
+		<tr><td>
+			Maximum Fragment Length: <td><input type="textfield" value="1000" name="max_fragment_length">
+		</tr>
+		<tr><td>
+			<b>Model Probability</b>
+		</tr>
+		<tr><td>
+			Mismatch Probability: <td><input type="textfield" value="0.05" name="mismatch_probability">
+		</tr>
+		<tr><td>
+			Minimum Relative Abundance: <td><input type="textfield" value="0.01" name="minimum_abundance">
+		</tr>
+		<tr><td>
+			<b>Parameters for Statistics
+		</tr>
+		<tr><td>
+			Bootstrap Iterations: <td><input type="textfield" value="10" name="bootstrap_iterations" readonly>
+		</tr>
+		<tr><td>
+			<b>Parameters for Genome Reconstruction
+		</tr>
+		<tr><td>
+			Reconstruction mode: <td> Reconstruct all genomes above cut-off <input type="radio" value="1" name="reconstruction_mode" disabled> <td> Reconstruct specific genome <input type="radio" value="2" name="reconstruction_mode" checked="checked">
+		</tr>
+		<tr><td>
+			Reconstruction Cutoff Abundance: <td><input type="textfield" value="1.0" name="cutoff_abundance" readonly>
+		</tr>
+		<tr><td>
+			Reconstruction Genome Name: <td><input type="textfield" value="Genome_Name" name="reconstruction_name"readonly>
+		</tr>
+		<tr><td>
+			Minimum Coverage Length: <td><input type="textfield" value="100" name="min_coverage_length" readonly>
+		</tr>
+		<tr><td>
+			Minimum Average Coverage Depth: <td><input type="textfield" value="3" name="min_coverage_depth" readonly>
+		</tr>
+		<tr><td>
+			<b>Variant Calling</b>
+		</tr>
+		<tr><td>
+			Filtering Genome Name: <td><input type="textfield" value="Genome_Name" name="filter_name" readonly>
+		</tr>
+      </table>
+    </div>
+    <br>
+    <div id="email_error">
+      <font color="red">Your email address is required!</font><br>
+    </div>
+    Your email address (Optional): <input type="textfield" name="email" id="email">
+    <br>
+    <input type="submit" value="Begin SigmaW">	  
+	</form>
+  </body>
+</html>

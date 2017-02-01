@@ -1,0 +1,1 @@
+python sigma/send_mail.py YOUR USER NAME@YOUR EMAIL DOMAIN $1

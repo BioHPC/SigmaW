@@ -1,0 +1,19 @@
+#	+	GvectorName	TotalNumberReads	NumberMappedReads	NumberUnmappedReads
+#	@	GenomeIndex	GenomeName	PercentageAlignmentRate
+#	*	GenomeIndex	PercentageScaledEstimation	RelativeAbundanceEstimation
++	sigma_out.gvector.txt	383848984	478964	383370020
+@	0	Citrobacter_freundii_CFNIH1	0.09
+@	1	Escherichia_coli_O104_H4_2011C_3493_uid176127	0.03
+@	2	Salmonella_enterica_serovar_Typhi_CT18_uid57793	0.02
+@	3	Klebsiella_pneumoniae_HS11286_uid84387	0.02
+@	4	Enterobacter_cloacae_ATCC_13047_uid48363	0.02
+@	5	Escherichia_coli_IAI39_uid59381	0.02
+@	6	Escherichia_coli_K_12_substr__MG1655_uid57779	0.02
+@	7	Escherichia_coli_O83_H1_NRG_857C_uid161987	0.02
+@	8	Escherichia_coli_UMN026_uid62981	0.02
+@	9	Escherichia_coli_O157_H7_uid57781	0.01
+@	10	Salmonella_enterica_serovar_Typhimurium_LT2_uid57799	0.01
+@	11	Shigella_dysenteriae_Sd197_uid58213	0.01
+@	12	Shigella_flexneri_2a_301_uid62907	0.01
+@	13	Enterobacter_aerogenes_KCTC_2190_uid68103	0.01
+*	0	70.889100135528352098	0.088454909020452693325

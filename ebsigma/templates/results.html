@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <script>
+      window.onload = function() {
+        document.getElementById("mode1").style.display = "block";
+        document.getElementById("mode2").style.display = "none";
+        
+        document.getElementById("mode").onclick = function() {
+            toggleMode(this);
+        };
+      };
+      
+      function toggleMode(box)
+      {
+        var m1 = document.getElementById("mode1");
+        var m2 = document.getElementById("mode2");
+        
+        if (box.checked) {
+            m1.style.display = "none";
+            m2.style.display = "block";
+        }
+        else {
+            m1.style.display = "block";
+            m2.style.display = "none";
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    {% load static %}
+    <h3>Download your data!</h3> <a href="{% static  ""%}{{uid}}/small.tar.bz2">Results only</a> <a href="{% static  ""%}{{uid}}/big.tar.bz2">Everything (Large File)</a>
+    Show relative abundance with unidentified strains? <input type="checkbox" name="mode" id="mode" value="1">
+    <div id="mode1">
+      <iframe src="{% static  ""%}{{uid}}/sigma_out.gvector.txt_krona1.html"  width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+    <div id="mode2">
+      <iframe src="{% static  ""%}{{uid}}/sigma_out.gvector.txt_krona2.html"  width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+  </body>
+</html>

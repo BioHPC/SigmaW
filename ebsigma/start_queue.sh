@@ -1,0 +1,1 @@
+python /opt/python/current/app/sigma/jobqueue.py
